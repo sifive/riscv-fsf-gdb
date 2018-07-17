@@ -1,3 +1,69 @@
+2018-09-03  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* riscv-tdep.c: Add 'prologue-value.h' include.
+	(struct riscv_unwind_cache): New struct.
+	(riscv_debug_unwinder): New global.
+	(riscv_scan_prologue): Update arguments, capture register details
+	from prologue scan.
+	(riscv_skip_prologue): Reformat arguments line, move end of
+	prologue calculation into riscv_scan_prologue.
+	(riscv_frame_cache): Update return type, create
+	riscv_unwind_cache, scan the prologue, and fill in remaining cache
+	details.
+	(riscv_frame_this_id): Use frame id computed in riscv_frame_cache.
+	(riscv_frame_prev_register): Use the trad_frame within the
+	riscv_unwind_cache.
+	(_initialize_riscv_tdep): Add 'set/show debug riscv unwinder'
+	flag.
+
+2018-09-03  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* trad-frame.h (trad_frame_set_realreg): Declare.
+	(trad_frame_set_addr): Declare.
+	* trad-frame.c (trad_frame_set_realreg): Define new function.
+	(trad_frame_set_addr): Define new function.
+	(trad_frame_set_reg_realreg): Use new function.
+	(trad_frame_set_reg_addr): Use new function.
+
+2018-09-01  Keith Seitz  <keiths@redhat.com>
+
+	* compile/compile-cplus-types.c (compile_cplus_debug_output_1): Use
+	pulongest instead of "%lld".
+	* compile/compile-cplus-symbols.c (gcc_cplus_convert_symbol): Remove
+	ATTRIBUTE_UNUSED.
+
+2018-08-31  Tom Tromey  <tom@tromey.com>
+
+	* dwarf2read.c (dwarf2_add_field): Set the TYPE_LENGTH of the
+	variant part type.
+
+2018-08-31  Pedro Alves  <palves@redhat.com>
+
+	* gdbarch.h: Regenerate.
+
+2018-08-31  Pedro Alves  <palves@redhat.com>
+
+	* gdbarch.sh (have_nonsteppable_watchpoint): Add comment.
+	* target.h (Hardware watchpoint interfaces): Describe
+	continuable/steppable/non-steppable watchpoints.
+	* gdbarch.h, gdbarch.c: Regenerate.
+
+2018-08-31  Pedro Alves  <palves@redhat.com>
+
+	* nto-procfs.c (nto_procfs_target::have_continuable_watchpoint):
+	Delete.
+	* s390-linux-nat.c
+	(s390_linux_nat_target::have_continuable_watchpoint): Delete.
+	* target.h (target_ops::have_continuable_watchpoint): Delete.
+	(target_have_continuable_watchpoint): Delete.
+	* x86-nat.h (x86_nat_target::have_continuable_watchpoint): Delete.
+	* target-delegates.c: Regenerate.
+
+2018-08-31  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	* gnulib/Makefile.in (aclocal_m4_deps): Update according to
+	the files present in "gnulib/import/m4/".
+
 2018-08-30  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* riscv-tdep.c (riscv_insn::decode): Decode c.addi4spn, c.sd,
