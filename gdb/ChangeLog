@@ -1,3 +1,683 @@
+<<<<<<< HEAD
+=======
+2018-08-29  Jim Wilson  <jimw@sifive.com>
+
+	* riscv-linux-nat.c: Include elf/common.h instead of elf.h.
+	(riscv_linux_nat_target::fetch_registers): Use NT_FPREGSET instead
+	of NT_PRFPREG.
+	(riscv_linux_nat_target::store_registers): Likewise.
+
+2018-08-29  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	PR gdb/23555
+	PR gdb/23558
+	* gnulib/aclocal.m4: Regenerate.
+	* gnulib/config.in: Regenerate.
+	* gnulib/configure: Regenerate.
+	* gnulib/import/Makefile.am: Update.
+	* gnulib/import/Makefile.in: Update.
+	* gnulib/import/extra/snippet/_Noreturn.h: Rename to...
+	* gnulib/import/_Noreturn.h: ... this.
+	* gnulib/import/alloca.in.h: Update.
+	* gnulib/import/extra/snippet/arg-nonnull.h: Rename to...
+	* gnulib/import/arg-nonnull.h: ... this.
+	* gnulib/import/assure.h: Update.
+	* gnulib/import/at-func.c: Update.
+	* gnulib/import/basename-lgpl.c: Update.
+	* gnulib/import/extra/snippet/c++defs.h: Rename to...
+	* gnulib/import/c++defs.h: ... this.
+	* gnulib/import/canonicalize-lgpl.c: Update.
+	* gnulib/import/cdefs.h: Update.
+	* gnulib/import/chdir-long.c: Update.
+	* gnulib/import/chdir-long.h: Update.
+	* gnulib/import/cloexec.c: Update.
+	* gnulib/import/cloexec.h: Update.
+	* gnulib/import/close.c: Update.
+	* gnulib/import/closedir.c: Update.
+	* gnulib/import/config.charset: Update.
+	* gnulib/import/dirent-private.h: Update.
+	* gnulib/import/dirent.in.h: Update.
+	* gnulib/import/dirfd.c: Update.
+	* gnulib/import/dirname-lgpl.c: Update.
+	* gnulib/import/dirname.h: Update.
+	* gnulib/import/dosname.h: Update.
+	* gnulib/import/dup-safer-flag.c: Update.
+	* gnulib/import/dup-safer.c: Update.
+	* gnulib/import/dup.c: Update.
+	* gnulib/import/dup2.c: Update.
+	* gnulib/import/errno.in.h: Update.
+	* gnulib/import/error.c: Update.
+	* gnulib/import/error.h: Update.
+	* gnulib/import/exitfail.c: Update.
+	* gnulib/import/exitfail.h: Update.
+	* gnulib/import/extra/update-copyright: Update.
+	* gnulib/import/fchdir.c: Update.
+	* gnulib/import/fcntl.c: Update.
+	* gnulib/import/fcntl.in.h: Update.
+	* gnulib/import/fd-hook.c: Update.
+	* gnulib/import/fd-hook.h: Update.
+	* gnulib/import/fd-safer-flag.c: Update.
+	* gnulib/import/fd-safer.c: Update.
+	* gnulib/import/fdopendir.c: Update.
+	* gnulib/import/filename.h: Update.
+	* gnulib/import/filenamecat-lgpl.c: Update.
+	* gnulib/import/filenamecat.h: Update.
+	* gnulib/import/flexmember.h: Update.
+	* gnulib/import/float+.h: Update.
+	* gnulib/import/float.c: Update.
+	* gnulib/import/float.in.h: Update.
+	* gnulib/import/fnmatch.c: Update.
+	* gnulib/import/fnmatch.in.h: Update.
+	* gnulib/import/fnmatch_loop.c: Update.
+	* gnulib/import/fpucw.h: Update.
+	* gnulib/import/frexp.c: Update.
+	* gnulib/import/frexpl.c: Update.
+	* gnulib/import/fstat.c: Update.
+	* gnulib/import/fstatat.c: Update.
+	* gnulib/import/getcwd-lgpl.c: Update.
+	* gnulib/import/getcwd.c: Update.
+	* gnulib/import/getdtablesize.c: Update.
+	* gnulib/import/getlogin_r.c: Update.
+	* gnulib/import/getprogname.c: Update.
+	* gnulib/import/getprogname.h: Update.
+	* gnulib/import/gettext.h: Update.
+	* gnulib/import/gettimeofday.c: Update.
+	* gnulib/import/glob-libc.h: Update.
+	* gnulib/import/glob.c: Update.
+	* gnulib/import/glob.in.h: Update.
+	* gnulib/import/glob_internal.h: Update.
+	* gnulib/import/glob_pattern_p.c: Update.
+	* gnulib/import/globfree.c: Update.
+	* gnulib/import/hard-locale.c: Update.
+	* gnulib/import/hard-locale.h: Update.
+	* gnulib/import/intprops.h: Update.
+	* gnulib/import/inttypes.in.h: Update.
+	* gnulib/import/isnan.c: Update.
+	* gnulib/import/isnand-nolibm.h: Update.
+	* gnulib/import/isnand.c: Update.
+	* gnulib/import/isnanl-nolibm.h: Update.
+	* gnulib/import/isnanl.c: Update.
+	* gnulib/import/itold.c: Update.
+	* gnulib/import/libc-config.h: Update.
+	* gnulib/import/limits.in.h: Update.
+	* gnulib/import/localcharset.c: Update.
+	* gnulib/import/localcharset.h: Update.
+	* gnulib/import/localtime-buffer.c: Update.
+	* gnulib/import/localtime-buffer.h: Update.
+	* gnulib/import/lstat.c: Update.
+	* gnulib/import/m4/00gnulib.m4: Update.
+	* gnulib/import/m4/__inline.m4: Update.
+	* gnulib/import/m4/absolute-header.m4: Update.
+	* gnulib/import/m4/alloca.m4: Update.
+	* gnulib/import/m4/builtin-expect.m4: Update.
+	* gnulib/import/m4/canonicalize.m4: Update.
+	* gnulib/import/m4/chdir-long.m4: Update.
+	* gnulib/import/m4/close.m4: Update.
+	* gnulib/import/m4/closedir.m4: Update.
+	* gnulib/import/m4/configmake.m4: Update.
+	* gnulib/import/m4/d-ino.m4: Update.
+	* gnulib/import/m4/d-type.m4: Update.
+	* gnulib/import/m4/dirent_h.m4: Update.
+	* gnulib/import/m4/dirfd.m4: Update.
+	* gnulib/import/m4/dirname.m4: Update.
+	* gnulib/import/m4/double-slash-root.m4: Update.
+	* gnulib/import/m4/dup.m4: Update.
+	* gnulib/import/m4/dup2.m4: Update.
+	* gnulib/import/m4/eealloc.m4: Update.
+	* gnulib/import/m4/environ.m4: Update.
+	* gnulib/import/m4/errno_h.m4: Update.
+	* gnulib/import/m4/error.m4: Update.
+	* gnulib/import/m4/exponentd.m4: Update.
+	* gnulib/import/m4/exponentl.m4: Update.
+	* gnulib/import/m4/extensions.m4: Update.
+	* gnulib/import/m4/extern-inline.m4: Update.
+	* gnulib/import/m4/fchdir.m4: Update.
+	* gnulib/import/m4/fcntl-o.m4: Update.
+	* gnulib/import/m4/fcntl.m4: Update.
+	* gnulib/import/m4/fcntl_h.m4: Update.
+	* gnulib/import/m4/fdopendir.m4: Update.
+	* gnulib/import/m4/filenamecat.m4: Update.
+	* gnulib/import/m4/flexmember.m4: Update.
+	* gnulib/import/m4/float_h.m4: Update.
+	* gnulib/import/m4/fnmatch.m4: Update.
+	* gnulib/import/m4/fnmatch_h.m4: Update.
+	* gnulib/import/m4/fpieee.m4: Update.
+	* gnulib/import/m4/frexp.m4: Update.
+	* gnulib/import/m4/frexpl.m4: Update.
+	* gnulib/import/m4/fstat.m4: Update.
+	* gnulib/import/m4/fstatat.m4: Update.
+	* gnulib/import/m4/getcwd-abort-bug.m4: Update.
+	* gnulib/import/m4/getcwd-path-max.m4: Update.
+	* gnulib/import/m4/getcwd.m4: Update.
+	* gnulib/import/m4/getdtablesize.m4: Update.
+	* gnulib/import/m4/getlogin.m4: Update.
+	* gnulib/import/m4/getlogin_r.m4: Update.
+	* gnulib/import/m4/getpagesize.m4: Update.
+	* gnulib/import/m4/getprogname.m4: Update.
+	* gnulib/import/m4/gettimeofday.m4: Update.
+	* gnulib/import/m4/glibc21.m4: Update.
+	* gnulib/import/m4/glob.m4: Update.
+	* gnulib/import/m4/glob_h.m4: Update.
+	* gnulib/import/m4/gnulib-cache.m4: Update.
+	* gnulib/import/m4/gnulib-common.m4: Update.
+	* gnulib/import/m4/gnulib-comp.m4: Update.
+	* gnulib/import/m4/gnulib-tool.m4: Update.
+	* gnulib/import/m4/hard-locale.m4: Update.
+	* gnulib/import/m4/include_next.m4: Update.
+	* gnulib/import/m4/inttypes-pri.m4: Update.
+	* gnulib/import/m4/inttypes.m4: Update.
+	* gnulib/import/m4/isnand.m4: Update.
+	* gnulib/import/m4/isnanl.m4: Update.
+	* gnulib/import/m4/largefile.m4: Update.
+	* gnulib/import/m4/limits-h.m4: Update.
+	* gnulib/import/m4/localcharset.m4: Update.
+	* gnulib/import/m4/locale-fr.m4: Update.
+	* gnulib/import/m4/locale-ja.m4: Update.
+	* gnulib/import/m4/locale-zh.m4: Update.
+	* gnulib/import/m4/localtime-buffer.m4: Update.
+	* gnulib/import/m4/longlong.m4: Update.
+	* gnulib/import/m4/lstat.m4: Update.
+	* gnulib/import/m4/malloc.m4: Update.
+	* gnulib/import/m4/malloca.m4: Update.
+	* gnulib/import/m4/math_h.m4: Update.
+	* gnulib/import/m4/mbrtowc.m4: Update.
+	* gnulib/import/m4/mbsinit.m4: Update.
+	* gnulib/import/m4/mbsrtowcs.m4: Update.
+	* gnulib/import/m4/mbstate_t.m4: Update.
+	* gnulib/import/m4/memchr.m4: Update.
+	* gnulib/import/m4/memmem.m4: Update.
+	* gnulib/import/m4/mempcpy.m4: Update.
+	* gnulib/import/m4/memrchr.m4: Update.
+	* gnulib/import/m4/mkdir.m4: Update.
+	* gnulib/import/m4/mkstemp.m4: Update.
+	* gnulib/import/m4/mmap-anon.m4: Update.
+	* gnulib/import/m4/mode_t.m4: Update.
+	* gnulib/import/m4/msvc-inval.m4: Update.
+	* gnulib/import/m4/msvc-nothrow.m4: Update.
+	* gnulib/import/m4/multiarch.m4: Update.
+	* gnulib/import/m4/nocrash.m4: Update.
+	* gnulib/import/m4/off_t.m4: Update.
+	* gnulib/import/m4/onceonly.m4: Update.
+	* gnulib/import/m4/open-cloexec.m4: Update.
+	* gnulib/import/m4/open.m4: Update.
+	* gnulib/import/m4/openat.m4: Update.
+	* gnulib/import/m4/opendir.m4: Update.
+	* gnulib/import/m4/pathmax.m4: Update.
+	* gnulib/import/m4/rawmemchr.m4: Update.
+	* gnulib/import/m4/readdir.m4: Update.
+	* gnulib/import/m4/readlink.m4: Update.
+	* gnulib/import/m4/realloc.m4: Update.
+	* gnulib/import/m4/rename.m4: Update.
+	* gnulib/import/m4/rewinddir.m4: Update.
+	* gnulib/import/m4/rmdir.m4: Update.
+	* gnulib/import/m4/save-cwd.m4: Update.
+	* gnulib/import/m4/secure_getenv.m4: Update.
+	* gnulib/import/m4/setenv.m4: Update.
+	* gnulib/import/m4/signal_h.m4: Update.
+	* gnulib/import/m4/ssize_t.m4: Update.
+	* gnulib/import/m4/stat-time.m4: Update.
+	* gnulib/import/m4/stat.m4: Update.
+	* gnulib/import/m4/std-gnu11.m4: Update.
+	* gnulib/import/m4/stdbool.m4: Update.
+	* gnulib/import/m4/stddef_h.m4: Update.
+	* gnulib/import/m4/stdint.m4: Update.
+	* gnulib/import/m4/stdio_h.m4: Update.
+	* gnulib/import/m4/stdlib_h.m4: Update.
+	* gnulib/import/m4/strchrnul.m4: Update.
+	* gnulib/import/m4/strdup.m4: Update.
+	* gnulib/import/m4/strerror.m4: Update.
+	* gnulib/import/m4/string_h.m4: Update.
+	* gnulib/import/m4/strstr.m4: Update.
+	* gnulib/import/m4/strtok_r.m4: Update.
+	* gnulib/import/m4/sys_socket_h.m4: Update.
+	* gnulib/import/m4/sys_stat_h.m4: Update.
+	* gnulib/import/m4/sys_time_h.m4: Update.
+	* gnulib/import/m4/sys_types_h.m4: Update.
+	* gnulib/import/m4/tempname.m4: Update.
+	* gnulib/import/m4/time_h.m4: Update.
+	* gnulib/import/m4/unistd-safer.m4: Update.
+	* gnulib/import/m4/unistd_h.m4: Update.
+	* gnulib/import/m4/warn-on-use.m4: Update.
+	* gnulib/import/m4/wchar_h.m4: Update.
+	* gnulib/import/m4/wchar_t.m4: Update.
+	* gnulib/import/m4/wctype_h.m4: Update.
+	* gnulib/import/m4/wint_t.m4: Update.
+	* gnulib/import/malloc.c: Update.
+	* gnulib/import/malloc/scratch_buffer.h: Update.
+	* gnulib/import/malloc/scratch_buffer_grow.c: Update.
+	* gnulib/import/malloc/scratch_buffer_grow_preserve.c: Update.
+	* gnulib/import/malloc/scratch_buffer_set_array_size.c: Update.
+	* gnulib/import/malloca.c: Update.
+	* gnulib/import/malloca.h: Update.
+	* gnulib/import/malloca.valgrind: Update.
+	* gnulib/import/math.in.h: Update.
+	* gnulib/import/mbrtowc.c: Update.
+	* gnulib/import/mbsinit.c: Update.
+	* gnulib/import/mbsrtowcs-impl.h: Update.
+	* gnulib/import/mbsrtowcs-state.c: Update.
+	* gnulib/import/mbsrtowcs.c: Update.
+	* gnulib/import/memchr.c: Update.
+	* gnulib/import/memmem.c: Update.
+	* gnulib/import/mempcpy.c: Update.
+	* gnulib/import/memrchr.c: Update.
+	* gnulib/import/mkdir.c: Update.
+	* gnulib/import/mkstemp.c: Update.
+	* gnulib/import/msvc-inval.c: Update.
+	* gnulib/import/msvc-inval.h: Update.
+	* gnulib/import/msvc-nothrow.c: Update.
+	* gnulib/import/msvc-nothrow.h: Update.
+	* gnulib/import/open.c: Update.
+	* gnulib/import/openat-die.c: Update.
+	* gnulib/import/openat-priv.h: Update.
+	* gnulib/import/openat-proc.c: Update.
+	* gnulib/import/openat.c: Update.
+	* gnulib/import/openat.h: Update.
+	* gnulib/import/opendir.c: Update.
+	* gnulib/import/pathmax.h: Update.
+	* gnulib/import/pipe-safer.c: Update.
+	* gnulib/import/rawmemchr.c: Update.
+	* gnulib/import/readdir.c: Update.
+	* gnulib/import/readlink.c: Update.
+	* gnulib/import/realloc.c: Update.
+	* gnulib/import/ref-add.sin: Update.
+	* gnulib/import/ref-del.sin: Update.
+	* gnulib/import/rename.c: Update.
+	* gnulib/import/rewinddir.c: Update.
+	* gnulib/import/rmdir.c: Update.
+	* gnulib/import/same-inode.h: Update.
+	* gnulib/import/save-cwd.c: Update.
+	* gnulib/import/save-cwd.h: Update.
+	* gnulib/import/scratch_buffer.h: Update.
+	* gnulib/import/secure_getenv.c: Update.
+	* gnulib/import/setenv.c: Update.
+	* gnulib/import/signal.in.h: Update.
+	* gnulib/import/stat-time.c: Update.
+	* gnulib/import/stat-time.h: Update.
+	* gnulib/import/stat-w32.c: Update.
+	* gnulib/import/stat-w32.h: Update.
+	* gnulib/import/stat.c: Update.
+	* gnulib/import/stdbool.in.h: Update.
+	* gnulib/import/stddef.in.h: Update.
+	* gnulib/import/stdint.in.h: Update.
+	* gnulib/import/stdio.in.h: Update.
+	* gnulib/import/stdlib.in.h: Update.
+	* gnulib/import/str-two-way.h: Update.
+	* gnulib/import/strchrnul.c: Update.
+	* gnulib/import/strdup.c: Update.
+	* gnulib/import/streq.h: Update.
+	* gnulib/import/strerror-override.c: Update.
+	* gnulib/import/strerror-override.h: Update.
+	* gnulib/import/strerror.c: Update.
+	* gnulib/import/string.in.h: Update.
+	* gnulib/import/stripslash.c: Update.
+	* gnulib/import/strnlen1.c: Update.
+	* gnulib/import/strnlen1.h: Update.
+	* gnulib/import/strstr.c: Update.
+	* gnulib/import/strtok_r.c: Update.
+	* gnulib/import/sys_stat.in.h: Update.
+	* gnulib/import/sys_time.in.h: Update.
+	* gnulib/import/sys_types.in.h: Update.
+	* gnulib/import/tempname.c: Update.
+	* gnulib/import/tempname.h: Update.
+	* gnulib/import/time.in.h: Update.
+	* gnulib/import/unistd--.h: Update.
+	* gnulib/import/unistd-safer.h: Update.
+	* gnulib/import/unistd.in.h: Update.
+	* gnulib/import/unsetenv.c: Update.
+	* gnulib/import/verify.h: Update.
+	* gnulib/import/extra/snippet/warn-on-use.h: Update.
+	* gnulib/import/wchar.in.h: Update.
+	* gnulib/import/wctype.in.h: Update.
+	* gnulib/import/xalloc-oversized.h: Update.
+	* gnulib/update-gnulib.sh (GNULIB_COMMIT_SHA1): Set to
+	"53e2c179f26a890fa6685af4b6c1397ee370433b".
+
+2018-08-16  Gary Benson <gbenson@redhat.com>
+
+	PR gdb/13000:
+	* gdb/main.c (captured_main_1): Exit with nonzero status
+	in batch mode if the last command to be executed failed.
+	* NEWS: Mention the above.
+
+2018-08-29  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* csky-tdep.c (csky_memory_insert_breakpoint): Remove newline at
+	end of warning message.
+
+2018-08-29  Alan Hayward  <alan.hayward@arm.com>
+
+	PR gdb/22943:
+	* aarch64-tdep.c (is_hfa_or_hva): Remove function.
+	(aarch64_extract_return_value): Use
+	aapcs_is_vfp_call_or_return_candidate.
+	(aarch64_return_in_memory): Likewise.
+	(aarch64_store_return_value): Likewise.
+
+2018-08-29  Alan Hayward  <alan.hayward@arm.com>
+
+	* aarch64-tdep.c
+	(aapcs_is_vfp_call_or_return_candidate): Make static
+	(pass_in_v_or_stack): Remove function.
+	(pass_in_v_vfp_candidate): New function.
+	(aarch64_push_dummy_call): Check for float register candidates.
+
+2018-08-29  Alan Hayward  <alan.hayward@arm.com>
+
+	* aarch64-tdep.c (HA_MAX_NUM_FLDS): New macro.
+	(aapcs_is_vfp_call_or_return_candidate_1): New function.
+	(aapcs_is_vfp_call_or_return_candidate): Likewise.
+
+2018-08-28  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	PR build/23399
+	* common/agent.c (IPA_SYM_STRUCT_NAME): Define.
+	(struct ipa_sym_addresses): Rename to...
+	(struct ipa_sym_addresses_common): ... this.
+	* common/agent.h (IPA_SYM): Use IPA_SYM_STRUCT_NAME.
+
+2018-08-28  Tom Tromey  <tom@tromey.com>
+
+	* c-exp.y (struct token_and_value): Remove typedef and DEF_VEC.
+	(token_fifo): Now a std::vector.
+	(yylex, c_parse): Update.
+	* d-exp.y (struct token_and_value): Remove typedef and DEF_VEC.
+	(token_fifo): Now a std::vector.
+	(yylex, d_parse): Update.
+	* go-exp.y (struct token_and_value): Remove typedef and DEF_VEC.
+	(token_fifo): Now a std::vector.
+	(yylex, go_parse): Update.
+
+2018-08-28  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* parser-defs.h (struct type_stack) <elements>: Change type to
+	std::vector<union type_stack_elt>.
+	<depth, size>: Remove.
+	* parse.c (parse_exp_in_context_1): Adjust.
+	(type_stack_reserve): Remove.
+	(check_type_stack_depth): Remove.
+	(insert_into_type_stack): Adjust to std::vector.
+	(insert_type): Likewise.
+	(push_type): Likewise.
+	(push_type_int): Likewise.
+	(insert_type_address_space): Likewise.
+	(pop_type): Likewise.
+	(pop_type_int): Likewise.
+	(pop_typelist): Likewise.
+	(pop_type_stack): Likewise.
+	(append_type_stack): Likewise.
+	(push_type_stack): Likewise.
+	(get_type_stack): Likewise.
+	(type_stack_cleanup): Likewise.
+	(push_typelist): Likewise.
+	(follow_types): Likewise.
+	(_initialize_parse): Likewise.
+
+2018-08-28  Hafiz Abid Qadeer  <abidh@codesourcery.com>
+
+	* NEWS: Mention csky target.
+
+2018-08-28  Jiangshuai Li  <jiangshuai_li@c-sky.com>
+	    Hafiz Abid Qadeer  <abidh@codesourcery.com>
+	    Don Breazeal  <donb@codesourcery.com>
+
+	* csky-linux-tdep.c: New file.
+	* csky-tdep.c: Likewise.
+	* csky-tdep.h: Likewise.
+	* Makefile.in (ALL_TARGET_OBS): Add csky-linux-tdep.o and
+	csky-tdep.o.
+	(HFILES_NO_SRCDIR): Add csky-tdep.h.
+	(ALLDEPFILES): Add csky-linux-tdep.c and csky-tdep.c
+	* configure.tgt: Add csky support.
+
+2018-08-27  Jan Vrany  <jan.vrany@fit.cvut.cz>
+
+	* python/py-framefilter.c (py_print_frame): Print frame architecture
+	when printing on an MI output.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	PR build/23087:
+	* configure: Rebuild.
+	* warning.m4 (AM_GDB_WARNINGS): Remove -Wno-narrowing.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* aarch64-linux-tdep.c
+	(aarch64_linux_iterate_over_regset_sections) <sve_regmap>: Add
+	casts to int.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* ppc64-tdep.c (insn_d, insn_ds, insn_xfx): Add casts to
+	unsigned.
+	(ppc64_standard_linkage1, ppc64_standard_linkage2)
+	(ppc64_standard_linkage3, ppc64_standard_linkage4)
+	(ppc64_standard_linkage5, ppc64_standard_linkage6)
+	(ppc64_standard_linkage7, ppc64_standard_linkage8): Add casts to
+	unsigned.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* xtensa-tdep.h (XTREG_END): Add cast to unsigned.
+	(XTENSA_GDBARCH_TDEP_INSTANTIATE): Likewise.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* tramp-frame.h (TRAMP_SENTINEL_INSN): Redefine.
+	* tilegx-linux-tdep.c (tilegx_linux_rt_sigframe): Use
+	ULONGEST_MAX.
+	* tic6x-linux-tdep.c (tic6x_linux_rt_sigreturn_tramp_frame): Use
+	ULONGEST_MAX.
+	* sparc64-linux-tdep.c (sparc64_linux_rt_sigframe): Use
+	ULONGEST_MAX.
+	* sparc-linux-tdep.c (sparc32_linux_sigframe)
+	(sparc32_linux_rt_sigframe): Use ULONGEST_MAX.
+	* ppc-nbsd-tdep.c (ppcnbsd_sigtramp, ppcnbsd2_sigtramp): Use
+	ULONGEST_MAX.
+	* ppc-linux-tdep.c (ppc32_linux_sigaction_tramp_frame)
+	(ppc64_linux_sigaction_tramp_frame)
+	(ppc32_linux_sighandler_tramp_frame)
+	(ppc64_linux_sighandler_tramp_frame): Use ULONGEST_MAX.
+	* nios2-linux-tdep.c (nios2_r1_linux_rt_sigreturn_tramp_frame)
+	(nios2_r2_linux_rt_sigreturn_tramp_frame): Use ULONGEST_MAX.
+	* mn10300-linux-tdep.c (am33_linux_sigframe)
+	(am33_linux_rt_sigframe): Use ULONGEST_MAX.
+	* mips64-obsd-tdep.c (mips64obsd_sigframe): Use ULONGEST_MAX.
+	* mips-linux-tdep.c (mips_linux_o32_sigframe)
+	(mips_linux_o32_rt_sigframe, mips_linux_n32_rt_sigframe)
+	(mips_linux_n64_rt_sigframe, micromips_linux_o32_sigframe)
+	(micromips_linux_o32_rt_sigframe, micromips_linux_n32_rt_sigframe)
+	(micromips_linux_n64_rt_sigframe): Use ULONGEST_MAX.
+	* mips-fbsd-tdep.c (mips_fbsd_sigframe, mipsn32_fbsd_sigframe)
+	(mips64_fbsd_sigframe): Use ULONGEST_MAX.
+	* microblaze-linux-tdep.c
+	(microblaze_linux_sighandler_tramp_frame): Use ULONGEST_MAX.
+	* i386-nbsd-tdep.c (i386nbsd_sigtramp_sc16, i386nbsd_sigtramp_sc2)
+	(i386nbsd_sigtramp_si2, i386nbsd_sigtramp_si31)
+	(i386nbsd_sigtramp_si4): Use ULONGEST_MAX.
+	* hppa-nbsd-tdep.c (hppanbsd_sigtramp_si4): Use ULONGEST_MAX.
+	* common/common-types.h (ULONGEST_MAX): New define.
+	(CORE_ADDR_MAX): Fix formatting.
+	* bfin-linux-tdep.c (bfin_linux_sigframe): Use ULONGEST_MAX.
+	* arm-obsd-tdep.c (armobsd_sigframe): Use ULONGEST_MAX.
+	* arm-linux-tdep.c (arm_linux_sigreturn_tramp_frame)
+	(arm_linux_rt_sigreturn_tramp_frame)
+	(arm_eabi_linux_sigreturn_tramp_frame)
+	(arm_eabi_linux_rt_sigreturn_tramp_frame)
+	(thumb2_eabi_linux_sigreturn_tramp_frame)
+	(thumb2_eabi_linux_rt_sigreturn_tramp_frame)
+	(arm_linux_restart_syscall_tramp_frame)
+	(arm_kernel_linux_restart_syscall_tramp_frame): Use ULONGEST_MAX.
+	* arm-fbsd-tdep.c (arm_fbsd_sigframe): Use ULONGEST_MAX.
+	* aarch64-linux-tdep.c (aarch64_linux_rt_sigframe): Use
+	ULONGEST_MAX.
+	* aarch64-fbsd-tdep.c (aarch64_fbsd_sigframe): Use ULONGEST_MAX.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* rs6000-tdep.c (ppc_deal_with_atomic_sequence): Use
+	CORE_ADDR_MAX.
+	* mips-tdep.c (mips_deal_with_atomic_sequence)
+	(micromips_deal_with_atomic_sequence): Use CORE_ADDR_MAX.
+	* arch/arm-get-next-pcs.c (thumb_deal_with_atomic_sequence_raw)
+	(arm_deal_with_atomic_sequence_raw): Use CORE_ADDR_MAX.
+	* alpha-tdep.c (alpha_deal_with_atomic_sequence): Use
+	CORE_ADDR_MAX.
+	* aarch64-tdep.c (aarch64_software_single_step): Use
+	CORE_ADDR_MAX.
+
+2018-08-27  Tom Tromey  <tom@tromey.com>
+
+	* linespec.c (complete_linespec_component): Add cast to "char".
+	* completer.c (completion_tracker::build_completion_result): Add
+	cast to "char".
+
+2018-08-26  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* solist.h (struct solist, struct target_so_ops): Fix
+	indentation.
+
+2018-08-26  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* ada-tasks.c (ada_task_info_s): Remove typedef.
+	(DEF_VEC_O(ada_task_info_s)): Remove.
+	(struct ada_tasks_inferior_data): Initialize fields.
+	<task_list>: Make an std::vector.
+	(get_ada_tasks_inferior_data): Allocate with new.
+	(ada_get_task_number): Adjust.
+	(get_task_number_from_id): Likewise.
+	(valid_task_id): Likewise.
+	(ada_get_task_info_from_ptid): Likewise.
+	(iterate_over_live_ada_tasks): Likewise.
+	(add_ada_task): Likewise.
+	(read_known_tasks): Likewise.
+	(ada_build_task_list): Likewise.
+	(print_ada_task_info): Likewise.
+	(info_task): Likewise.
+	(task_command_1): Likewise.
+
+2018-08-26  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* ada-lang.c (add_angle_brackets): Return std::string.
+
+2018-08-25  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* python/py-threadevent.c (py_get_event_thread): Initialize
+	pythread.
+
+2018-08-24  Pedro Alves  <palves@redhat.com>
+
+	* python/py-bpevent.c (create_breakpoint_event_object): Use
+	copy-initialization.
+	* python/py-continueevent.c (emit_continue_event): Use
+	copy-initialization.
+	* python/py-exitedevent.c (create_exited_event_object): Return a
+	gdbpy_ref<>.
+	(emit_exited_event): Use copy-initialization.
+	* python/py-inferior.c (python_new_inferior)
+	(python_inferior_deleted, add_thread_object): Use
+	copy-initialization.
+	* python/py-infevents.c (create_inferior_call_event_object)
+	(create_register_changed_event_object)
+	(create_memory_changed_event_object): Return a gdbpy_ref<>.
+	(emit_inferior_call_event, emit_memory_changed_event)
+	(emit_register_changed_event): Use copy-initialization.
+	* python/py-newobjfileevent.c (create_new_objfile_event_object):
+	Return a gdbpy_ref<>.
+	(emit_new_objfile_event): Use copy-initialization.
+	(create_clear_objfiles_event_object): Return a gdbpy_ref<>.
+	(emit_clear_objfiles_event): Use copy-initialization.
+	* python/py-signalevent.c (create_signal_event_object): Use
+	copy-initialization.
+	* python/py-threadevent.c (create_thread_event_object): Use
+	copy-initialization.
+
+2018-08-24  Pedro Alves  <palves@redhat.com>
+	    Simon Marchi  <simon.marchi@ericsson.com>
+
+	PR gdb/23379
+	* python/py-continueevent.c: Include "gdbthread.h".
+	(create_continue_event_object): Add intro comment.  Add 'ptid'
+	parameter.  Use it to find thread to pass to
+	create_thread_event_object.
+	(emit_continue_event): Pass PTID down to
+	create_continue_event_object.
+	* python/py-event.h (py_get_event_thread): Declare.
+	(create_thread_event_object): Remove default from 'thread'
+	parameter.
+	* python/py-stopevent.c (create_stop_event_object): Use
+	py_get_event_thread.
+	* python/py-threadevent.c (get_event_thread): Rename to ...
+	(py_get_event_thread): ... this, make extern, add 'ptid' parameter
+	and use it to find the thread.
+	(create_thread_event_object): Assert that THREAD isn't null.
+	Don't find the event thread here.
+
+2018-08-23  Kevin Buettner  <kevinb@redhat.com>
+
+	* block.h (blockrange, blockranges): New struct declarations.
+	(struct block): Add new field named `ranges'.
+	(BLOCK_RANGES, BLOCK_NRANGES, BLOCK_RANGE, BLOCK_CONTIGUOUS_P)
+	(BLOCK_RANGE_START, BLOCK_RANGE_END, BLOCK_ENTRY_PC): New
+	macros for accessing ranges in struct block.
+	(make_blockranges): New declaration.
+	block.c (make_blockranges): New function.
+	* dwarf2read.c (dwarf2_record_block_ranges): Fill in BLOCK_RANGES
+	for block.
+	* symtab.h (find_pc_partial_function): Add new parameter `block'.
+	* blockframe.c (cache_pc_function_block): New static global.
+	(clear_pc_function_cache): Clear cache_pc_function_block.
+	(find_pc_partial_function): Move comment to symtab.h.  Add
+	support for non-contiguous blocks.
+	* cli/cli-cmds.c (block.h): Include.
+	(print_disassembly): Handle printing of non-contiguous blocks.
+	(disassemble_current_function): Likewise.
+	(disassemble_command): Likewise.
+
+	* ax-gdb.c (gen_var_ref): Use BLOCK_ENTRY_PC in place of
+	BLOCK_START.
+	* blockframe.c (get_pc_function_start): Likewise.
+	* compile/compile-c-symbols.c (convert_one_symbol): Likewise.
+	(gcc_symbol_address): Likewise.
+	* compile/compile-object-run.c (compile_object_run): Likewise.
+	* compile/compile.c (get_expr_block_and_pc): Likewise.
+	* dwarf2loc.c (dwarf2_find_location_expression): Likewise.
+	(func_addr_to_tail_call_list): Likewise.
+	* findvar.c (default_read_var_value): Likewise.
+	* inline-frame.c (inline_frame_this_id): Likewise.
+	(skip-inline_frames): Likewise.
+	* infcmd.c (until_next_command): Likewise.
+	* linespec.c (convert_linespec_to_sals): Likewise.
+	* parse.c (parse_exp_in_context_1): Likewise.
+	* printcmd.c (build_address_symbolic): likewise.
+	(info_address_command): Likewise.
+	symtab.c (find_function_start_sal): Likewise.
+	(skip_prologue_sal): Likewise.
+	(find_function_alias_target): Likewise.
+	(find_gnu_ifunc): Likewise.
+	* stack.c (find_frame_funname): Likewise.
+	* symtab.c (fixup_symbol_section): Likewise.
+	(find_function_start_sal): Likewise.
+	(skip_prologue_sal): Likewsie.
+	(find_function_alias_target): Likewise.
+	(find_gnu_ifunc): Likewise.
+	* tracepoint.c (info_scope_command): Likewise.
+	* value.c (value_fn_field): Likewise.
+
+	* infrun.c (fill_in_stop_func): Use find_function_entry_range_from_pc
+	in place of find_pc_partial_function.
+	* blockframe.c (find_function_entry_range_from_pc): New function.
+	* symtab.h (find_function_entry_range_from_pc): Declare and document.
+	* objfiles.c (objfile_relocate1): Relocate start and end addresses
+	for each range in a block.
+
+
+2018-08-23  Xavier Roirand  <roirand@adacore.com>
+
+	* machoread.c (macho_symfile_read_all_oso): Remove uneeded
+	incrementation.
+
+>>>>>>> 4d3928d7e0... Fix riscv-linux native gdb build failure.
 2018-08-22  Simon Marchi  <simon.marchi@polymtl.ca>
 
 	* solib-svr4.c (read_program_headers_from_bfd): Return
