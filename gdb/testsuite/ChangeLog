@@ -1,3 +1,219 @@
+<<<<<<< HEAD
+=======
+2018-10-23  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* gdb.arch/riscv-reg-aliases.c: New file.
+	* gdb.arch/riscv-reg-aliases.exp: New file.
+
+2018-10-19  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.python/py-cmd.exp: Check for gdb_prompt.
+
+2018-10-19  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.base/vla-optimized-out.exp: Allow either optimized out or 6.
+
+2018-10-19  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.cp/ovldbreak.exp: Fix regexps.
+
+2018-10-19  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.compile/compile-cplus-print.exp: Start inferior earlier.
+
+2018-10-18  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	PR cli/23785
+	* gdb.base/restore.exp: New test to check if "restore" with an
+	invalid file doesn't segfault.
+
+2018-10-18  Tom de Vries  <tdevries@suse.de>
+
+	* gdb.ada/bp_inlined_func.exp: Fix capitalized test name.
+	* gdb.ada/excep_handle.exp: Same.
+	* gdb.ada/mi_string_access.exp: Same.
+	* gdb.ada/mi_var_union.exp: Same.
+	* gdb.arch/arc-analyze-prologue.exp: Same.
+	* gdb.arch/arc-decode-insn.exp: Same.
+	* gdb.base/readnever.exp: Same.
+	* gdb.fortran/printing-types.exp: Same.
+	* gdb.guile/scm-lazy-string.exp: Same.
+
+2018-10-16  Tom de Vries  <tdevries@suse.de>
+
+	PR gdb/23730
+	* gdb.base/catch-follow-exec.c: Add copyright notice.
+	* gdb.base/catch-follow-exec.exp: Rewrite to use
+	gdb_spawn_with_cmdline_opts.  Require gdb-native.
+
+2018-10-12  Sandra Loosemore  <sandra@codesourcery.com>
+
+	* gdb.trace/actions-changed.exp: Check for arch support.
+	* gdb.trace/actions.exp: Likewise.
+	* gdb.trace/ax.exp: Likewise.
+	* gdb.trace/backtrace.exp: Likewise.
+	* gdb.trace/change-loc.exp: Likewise.
+	* gdb.trace/deltrace.exp: Likewise.
+	* gdb.trace/ftrace-lock.exp: Check for shlib and arch support.
+	* gdb.trace/ftrace.exp: Likewise.
+	* gdb.trace/infotrace.exp: Check for arch support.
+	* gdb.trace/mi-trace-frame-collected.exp: Likewise.
+	* gdb.trace/mi-tracepoint-changed.exp: Likewise.
+	* gdb.trace/mi-tsv-changed.exp: Likewise.
+	* gdb.trace/packetlen.exp: Likewise.
+	* gdb.trace/passc-dyn.exp: Likewise.
+	* gdb.trace/passcount.exp: Likewise.
+	* gdb.trace/pending.exp: Likewise.
+	* gdb.trace/range-stepping.exp: Check for shlib support.
+	* gdb.trace/report.exp: Check for arch support.
+	* gdb.trace/save-trace.exp: Likewise.
+	* gdb.trace/signal.exp: Check for signal support.
+	* gdb.trace/tfind.exp: Check for arch support.
+	* gdb.trace/trace-break.exp: Check for arch and shlib support.
+	* gdb.trace/trace-common.h: Add comment.
+	* gdb.trace/trace-condition.exp: Check for shlib and arch support.
+	* gdb.trace/trace-enable-disable.exp: Likewise.
+	* gdb.trace/trace-mt.exp: Likewise.  Remove redundant untested call.
+	* gdb.trace/tracecmd.exp: Check for arch support.
+	* gdb.trace/tspeed.exp: Check for shlib and target support.
+	* gdb.trace/tstatus.exp: Check for arch support.
+	* gdb.trace/tsv.exp: Likewise.
+	* gdb.trace/while-dyn.exp: Likewise.
+	* gdb.trace/while-stepping.exp: Likewise.
+	* lib/trace-support.exp (gdb_trace_common_supports_arch): New.
+
+2018-10-12  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* gdb.trace/tspeed.exp: Remove nowarnings.
+	(prepare_for_trace_test): Declare "global ipalib".
+	* gdb.trace/tspeed.c: Include unistd.h.
+	(main): Remove superfluous printf argument.
+
+2018-10-11  Sandra Loosemore  <sandra@codesourcery.com>
+
+	* gdb.base/solib-vanish.exp: Fix regexp not to require a POSIX
+	directory prefix on the filename.
+
+2018-10-10  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	* gdb.gdb/unittest.exp: Update expected message informing that
+	selftests have been disabled.
+	* gdb.server/unittest.exp: Likewise.
+
+2018-10-09  Tom de Vries  <tdevries@suse.de>
+
+	* lib/gdb.exp (target_supports_scheduler_locking): Replace gdb_start_cmd
+	with runto_main.
+
+2018-10-08  Weimin Pan  <weimin.pan@oracle.com>
+
+	PR c++/16841
+	* gdb.cp/virtbase2.cc: New file.
+	* gdb.cp/virtbase2.exp: New file.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	PR python/19399:
+	* gdb.python/py-inferior.exp: Add architecture test.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	* gdb.base/gnu-ifunc.exp (build): Use standard_output_file.
+	* gdb.trace/unavailable-dwarf-piece.exp: Use standard_output_file.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	* gdb.python/py-breakpoint.exp (check_last_event): Check location
+	of a "throw" catchpoint.
+
+2018-10-06  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	* gdb.base/info-proc.exp: Update string expected from "help info
+	proc".
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* gdb.cp/maint.exp (test_invalid_name): Update expected output.
+	* gdb.gdb/complaints.exp (test_short_complaints): Remove.
+	(test_initial_complaints, test_empty_complaints): Update.
+	* gdb.dwarf2/dw2-stack-boundary.exp: Update.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	PR cli/19551:
+	* lib/mi-support.exp (mi_gdb_file_cmd): Update.
+	* lib/gdb.exp (gdb_file_cmd): Update.
+	* gdb.stabs/weird.exp (print_weird_var): Update.
+	* gdb.server/solib-list.exp: Update.
+	* gdb.multi/remove-inferiors.exp (test_remove_inferiors): Update.
+	* gdb.mi/mi-cli.exp: Update.
+	* gdb.linespec/linespec.exp: Update.
+	* gdb.dwarf2/dw2-stack-boundary.exp: Update.
+	* gdb.dwarf2/dw2-objfile-overlap.exp: Update.
+	* gdb.cp/cp-relocate.exp: Update.
+	* gdb.base/sym-file.exp: Update.
+	* gdb.base/relocate.exp: Update.
+	* gdb.base/readnever.exp: Update.
+	* gdb.base/print-symbol-loading.exp (test_load_core): Update.
+	* gdb.base/kill-detach-inferiors-cmd.exp: Update.
+	* gdb.base/dbx.exp (gdb_file_cmd): Update.
+	* gdb.base/code_elim.exp: Update.
+	* gdb.base/break-unload-file.exp (test_break): Update.
+	* gdb.base/break-interp.exp (test_attach_gdb): Update.
+	* gdb.base/break-idempotent.exp (force_breakpoint_re_set):
+	Update.
+	* gdb.base/attach.exp (do_attach_tests): Update.
+	* gdb.base/sepdebug.exp: Update.
+	* gdb.python/py-section-script.exp: Update.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	PR cli/22234:
+	* gdb.dwarf2/dw2-stack-boundary.exp: Update expected output.
+	* gdb.gdb/complaints.exp (test_short_complaints): Update expected
+	output.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* gdb.base/attach.exp (test_command_line_attach_run): Use -quiet;
+	set width and height to 0.
+	(test_command_line_attach_run): Use -quiet.
+
+2018-10-03  Sandra Loosemore  <sandra@codesourcery.com>
+
+	* lib/gdb.exp (skip_ifunc_tests): New.
+	* gdb.base/gnu-ifunc.exp: Skip if no ifunc support.  Handle
+	other compile failures.
+	* gdb.compile/compile-ifunc.exp: Skip if no ifunc support.
+
+2018-10-01  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* gdb.arch/i386-avx512.exp: Fix setting of nr_regs based on
+	is_amd64_regs_target.
+
+2018-10-01  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.arch/aarch64-sighandler-regs.c: New test.
+	* gdb.arch/aarch64-sighandler-regs.exp: New file.
+	* lib/gdb.exp (skip_aarch64_sve_tests): New proc.
+
+2018-10-01  Markus Metzger  <markus.t.metzger@intel.com>
+
+	* lib/gdb.exp (is_amd64_regs_target): Change assembly to C inline
+	assembly.
+
+2018-09-28  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* gdb.base/frame-selection.exp: New file.
+	* gdb.base/frame-selection.c: New file.
+
+2018-09-27  Alan Hayward  <alan.hayward@arm.com>
+
+	* gdb.threads/check-libthread-db.c (thread_routine): Use a
+	pthread barrier.
+	(main): Likewise.
+
+>>>>>>> 0dbfcfffe9... gdb/riscv: Fix register access for register aliases
 2018-09-26  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* gdb.base/large-frame-1.c: New file.
