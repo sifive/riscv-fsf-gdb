@@ -1,3 +1,774 @@
+2018-10-22  Jim Wilson  <jimw@sifive.com>
+
+	* riscv-tdep.c (riscv_fpreg_d_type, riscv_fpreg_q_type): New.
+	(riscv_register_type): Use them.
+	(riscv_print_one_register_info): Handle union of floats same as float.
+	* riscv-tdep.h (struct gdbarch_tdep): Add riscv_fpreg_d_type and
+	riscv_fpreg_q_type fields.
+
+2018-10-21  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* gdbarch.sh (gdbarch_num_cooked_regs): New.
+	* gdbarch.h: Re-generate.
+	* ax-gdb.c (gen_expr): Use gdbarch_num_cooked_regs.
+	* dwarf2-frame.c (dwarf2_frame_cache): Likewise.
+	* eval.c (evaluate_subexp_standard): Likewise.
+	* findvar.c (value_of_register): Likewise.
+	(value_of_register_lazy): Likewise.
+	(address_from_register): Likewise.
+	* frame.c (get_frame_register_bytes): Likewise.
+	* gdbarch-selftests.c (register_to_value_test): Likewise.
+	* h8300-tdep.c (h8300_register_type): Likewise.
+	* i386-tdep.c (i386_dbx_reg_to_regnum): Likewise.
+	(i386_svr4_reg_to_regnum): Likewise.
+	* infcmd.c (default_print_registers_info): Likewise.
+	(registers_info): Likewise.
+	(print_vector_info): Likewise.
+	(default_print_float_info): Likewise.
+	* m68hc11-tdep.c (m68hc11_frame_unwind_cache): Likewise.
+	* mdebugread.c (mdebug_reg_to_regnum): Likewise.
+	* mi/mi-main.c (mi_cmd_data_list_register_names): Likewise.
+	(mi_cmd_data_list_changed_registers): Likewise.
+	(mi_cmd_data_list_register_values): Likewise.
+	(mi_cmd_data_write_register_values): Likewise.
+	(mi_cmd_trace_frame_collected): Likewise.
+	* mips-tdep.c (print_gp_register_row): Likewise.
+	(mips_print_registers_info): Likewise.
+	* nds32-tdep.c (nds32_gdbarch_init): Likewise.
+	* regcache.c (init_regcache_descr): Likewise.
+	(register_size): Likewise.
+	(register_dump::dump): Likewise.
+	(cooked_read_test): Likewise.
+	(cooked_write_test): Likewise.
+	* rs6000-tdep.c (rs6000_register_sim_regno): Likewise.
+	(rs6000_gdbarch_init): Likewise.
+	* stabsread.c (stab_reg_to_regnum): Likewise.
+	* stack.c (info_frame_command): Likewise.
+	* target-descriptions.c (tdesc_register_name): Likewise.
+	* trad-frame.c (trad_frame_alloc_saved_regs): Likewise.
+	* tui/tui-regs.c (tui_show_register_group): Likewise.
+	* user-regs.c (user_reg_map_name_to_regnum): Likewise.
+	(user_reg_map_regnum_to_name): Likewise.
+	(value_of_user_reg): Likewise.
+	(maintenance_print_user_registers): Likewise.
+	* xtensa-tdep.c (xtensa_find_register_by_name): Likewise.
+	(xtensa_register_name): Likewise.
+	(xtensa_register_type): Likewise.
+	(xtensa_reg_to_regnum): Likewise.
+	(xtensa_pseudo_register_read): Likewise.
+	(xtensa_pseudo_register_write): Likewise.
+
+2018-10-21  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* amd64-tdep.c (amd64_pseudo_register_read_value): Use
+	correctly-sized buffer with raw_read.
+	(amd64_pseudo_register_write): Use correctly-sized buffer for
+	raw_read/raw_write.
+
+2018-10-19  Philippe Waroquiers  <philippe.waroquiers@skynet.be>
+
+	* typeprint.c (_initialize_typeprint): Fix wrong prefixname arg
+	in add_prefix_cmd of set print type.
+
+2018-10-19  Tom Tromey  <tom@tromey.com>
+
+	PR tui/18388:
+	* NEWS: Mention tabset deprecation.
+	* tui/tui-win.c (tui_tab_width, internal_tab_width): New globals.
+	(update_tab_width): New function.
+	(tui_set_tab_width, tui_show_tab_width): New functions.
+	(tui_set_tab_width_command): Use update_tab_width.
+	(_initialize_tui_win): Move to end of file.  Deprecate "tabset".
+	Add new "set tui tab-width" command.
+	* tui/tui-source.c (tui_set_source_content): Update.
+	* tui/tui-disasm.c (tui_set_disassem_content): Update.
+	* tui/tui-data.h (tui_default_tab_len, tui_set_default_tab_len):
+	Don't declare.
+	(tui_tab_width): Declare.
+	* tui/tui-data.c (default_tab_len, tui_default_tab_len)
+	(tui_set_default_tab_len): Remove.
+
+2018-10-19  Tom Tromey  <tom@tromey.com>
+
+	* tui/tui-io.h (key_is_start_sequence, key_is_end_sequence)
+	(key_is_backspace, tui_getc): Don't declare.
+	* tui/tui-io.c (key_is_start_sequence): Now static.
+	(key_is_end_sequence, key_is_backspace): Remove.
+	(tui_getc): Now static.
+
+2018-10-19  Tom Tromey  <tom@tromey.com>
+
+	* symfile.c (reread_symbols): Clear "static_links".
+
+2018-10-19  Alan Hayward  <alan.hayward@arm.com>
+
+	* aarch64-linux-tdep.c (AARCH64_SIGCONTEXT_RESERVED_SIZE): New
+	define.
+	(aarch64_linux_sigframe_init): Extra boundary checks.
+
+2018-10-19  Andreas Arnez  <arnez@linux.ibm.com>
+
+	* s390-tdep.c (s390_pseudo_register_type): For v0-v15 don't yield
+	the possibly non-existent tdesc type 'vec128', but the type of raw
+	register v16 instead.
+
+2018-10-19  Gary Benson <gbenson@redhat.com>
+
+	* cli/cli-interp.c (cli_interp::~cli_interp): New function.
+
+2018-10-18  Sergio Durigan Junior  <sergiodj@redhat.com>
+
+	PR cli/23785
+	* cli/cli-dump.c (restore_binary_file): Check if "file" is
+	NULL.
+
+2018-10-17  Paul Koning  <paul_koning@dell.com>
+
+	* charset.c (convert_between_encodings): Fix unsigned overflow.
+
+2018-10-17  John Baldwin  <jhb@FreeBSD.org>
+
+	* fbsd-nat.c (fbsd_nat_target::info_proc) Use
+	fbsd_info_proc_mappings_header and fbsd_info_proc_mappings_entry.
+	* fbsd-tdep.c (fbsd_vm_map_entry_flags): Mark static.
+	(fbsd_info_proc_mappings_header, fbsd_info_proc_mappings_entry):
+	New functions.
+	(fbsd_core_info_proc_mappings): Use fbsd_info_proc_mappings_header
+	and fbsd_info_proc_mappings_header.
+	* fbsd-tdep.h (fbsd_vm_map_entry_flags): Remove.
+	(fbsd_info_proc_mappings_header, fbsd_info_proc_mappings_entry):
+	New.
+
+2018-10-17  Joel Brobecker  <brobecker@adacore.com>
+
+	* MAINTAINERS (Responsible Maintainers): Add Rainer Orth as
+	Solaris Maintainer.
+
+2018-10-15  Tom Tromey  <tom@tromey.com>
+
+	* tui/tui.c (strcat_to_buf): Remove casts.
+	* tui/tui-winsource.c (tui_show_source_line)
+	(tui_set_is_exec_point_at, tui_line_is_displayed): Remove casts.
+	* tui/tui-wingeneral.c (tui_refresh_win, box_win): Remove casts.
+	* tui/tui-windata.c (tui_first_data_item_displayed)
+	(tui_delete_data_content_windows, tui_erase_data_content)
+	(tui_display_all_data, tui_display_data_from)
+	(tui_refresh_data_win, tui_vertical_data_scroll): Remove casts.
+	* tui/tui-win.c (tui_set_win_height)
+	(make_invisible_and_set_new_height, parse_scrolling_args): Remove
+	casts.
+	* tui/tui-win.c (tui_resize_all): Remove casts.
+	(tui_scroll_backward_command, tui_set_focus)
+	(tui_set_tab_width_command): Likewise.
+	* tui/tui-source.c (tui_vertical_source_scroll): Remove cast.
+	* tui/tui-regs.c (tui_show_register_group): Remove cast.
+	* tui/tui-layout.c (tui_set_layout_by_name): Remove cast.
+	* tui/tui-disasm.c (tui_vertical_disassem_scroll): Remove cast.
+	* tui/tui-data.c (tui_partial_win_by_name, tui_free_win_content):
+	Remove casts.
+
+2018-10-15  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* MAINTAINERS (Responsible Maintainers): Add Alan Hayward as
+	AArch64/ARM maintainer.
+
+2018-10-11  Gary Benson <gbenson@redhat.com>
+
+	* interps.h (interp::m_name): Make private and mutable.
+	* interps.c (interp::~interp): Free m_name.
+
+2018-10-10  Sergio Durigan Junior  <sergiodj@redhat.com>
+	    Simon Marchi <simark@simark.ca>
+
+	* README (`configure' options): Add documentation for new
+	"--enable-unit-tests" option.
+	* acinclude.m4: Include "selftest.m4".
+	* configure: Regenerate.
+	* configure.ac: Use "GDB_AC_SELFTEST".
+	* maint.c (maintenance_selftest): Update message informing
+	that selftests have been disabled.
+	(maintenance_info_selftests): Likewise.
+	* selftest.m4: New file.
+
+2018-10-10  Gary Benson <gbenson@redhat.com>
+
+	* remote.c (remote_target::remote_send_printf): Add
+	missing va_end found by Coverity.
+
+2018-10-10  Markus Metzger  <markus.t.metzger@intel.com>
+
+	* btrace.c (ftrace_update_function): Add indirect jump heuristic.
+
+2018-10-09  Tom Tromey  <tom@tromey.com>
+
+	* configure: Rebuild.
+	* sanitize.m4 (AM_GDB_UBSAN): Default to no.
+	* NEWS: Update --enable-ubsan documentation.
+
+2018-10-09  Gary Benson <gbenson@redhat.com>
+
+	* dwarf2read.c (create_dwp_hash_table): Fix buffer overrun
+	found by Coverity.
+
+2018-10-08  Tom Tromey  <tom@tromey.com>
+
+	* riscv-fbsd-tdep.c (riscv_fbsd_sigframe_init): Remove unused
+	variable.
+	(riscv_fbsd_init_abi): Likewise.
+
+2018-10-08  Weimin Pan  <weimin.pan@oracle.com>
+	* valops.c (value_struct_elt_for_reference): Rename local variable
+	to work around the shadowing a previous local warning.
+
+2018-10-08  John Baldwin  <jhb@FreeBSD.org>
+
+	* Makefile.in (ALLDEPFILES): Add riscv-fbsd-nat.c.
+	* NEWS: Mention new FreeBSD/riscv native configuration.
+	* configure.host: Add riscv*-*-freebsd*.
+	* configure.nat: Likewise.
+	* riscv-fbsd-nat.c: New file.
+
+2018-10-08  John Baldwin  <jhb@FreeBSD.org>
+
+	* Makefile.in (ALL_TARGET_OBS): Add riscv-fbsd-tdep.o.
+	(HFILES_NO_SRCDIR): Add riscv-fbsd-tdep.h.
+	(ALLDEPFILES): Add riscv-fbsd-tdep.c.
+	* NEWS: Mention new FreeBSD/riscv target.
+	* configure.tgt: Add riscv*-*-freebsd*.
+	* riscv-fbsd-tdep.c: New file.
+	* riscv-fbsd-tdep.h: New file.
+
+2018-10-08  John Baldwin  <jhb@FreeBSD.org>
+
+	* regcache.h (struct regcache_map_entry): Note that this type can
+	be used with traditional frame caches.
+	* trad-frame.c (trad_frame_set_reg_regmap): New.
+	* trad-frame.h (trad_frame_set_reg_regmap): New.
+
+2018-10-08  Weimin Pan  <weimin.pan@oracle.com>
+
+	PR c++/16841
+	* valops.c (get_virtual_base_offset): New function.
+	(value_struct_elt_for_reference): Use it to get virtual base offset
+	and add it in calculating class member address.
+
+2018-10-08   John Darrington <john@darrington.wattle.id.au>
+
+    * dwarf2read.c (dwarf2_cu) <producer_is_codewarrior>: New field.
+      (check_producer): Check if the producer is codewarrior.
+      (producer_is_codewarrior): New function.
+      (lnp_state_machine::record_line): Ignore is_stmt flag for records
+       produced by codewarrior.
+      (dwarf2_cu::dwarf2_cu): Initialize producer_is_codewarrior.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	PR python/19399:
+	* python/py-inferior.c: Add "architecture" entry.
+	(infpy_architecture): New function.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	PR python/21765:
+	* python/py-symbol.c (gdbpy_initialize_symbols): Redefine
+	SYMBOL_VARIABLES_DOMAIN, SYMBOL_FUNCTIONS_DOMAIN,
+	SYMBOL_TYPES_DOMAIN.  Define SYMBOL_MODULE_DOMAIN,
+	SYMBOL_COMMON_BLOCK_DOMAIN, SYMBOL_LOC_COMMON_BLOCK.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	PR build/17077:
+	* Makefile.in (OPCODES_CFLAGS): Remove "-I$(OPCODES_SRC)/..".
+	* arc-tdep.c, frv-tdep.c, lm32-tdep.c, mep-tdep.c,
+	microblaze-tdep.c, or1k-tdep.h: Use ../opcodes, not opcodes, in
+	#include.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	* python/py-breakpoint.c (bppy_get_location): Handle a
+	bp_breakpoint without a location.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	* python/lib/gdb/function/strfns.py (_MemEq, _StrLen, _StrEq)
+	(_RegEx): Reformat help text.
+	* python/lib/gdb/function/caller_is.py (CallerIs, CallerMatches)
+	(AnyCallerIs, AnyCallerMatches): Reformat help text.
+	* python/lib/gdb/function/as_string.py (_AsString): Reformat help
+	text.
+	* python/lib/gdb/command/xmethods.py (InfoXMethod)
+	(EnableXMethod, DisableXMethod): Remove help indentation.
+	Capitalize meta-syntactic variables.
+	* python/lib/gdb/command/unwinders.py (InfoUnwinder)
+	(EnableUnwinder, DisableUnwinder): Remove help indentation.
+	Capitalize meta-syntactic variables.
+	* python/lib/gdb/command/explore.py (ExploreCommand)
+	(ExploreValueCommand, ExploreTypeCommand): Reformat help text.
+	* python/lib/gdb/command/type_printers.py (InfoTypePrinter)
+	(EnableTypePrinter, DisableTypePrinter): Remove help indentation.
+	* python/lib/gdb/command/pretty_printers.py (InfoPrettyPrinter):
+	Remove help indentation.
+	(EnablePrettyPrinter, DisablePrettyPrinter): Likewise.
+	* python/lib/gdb/command/frame_filters.py (EnableFrameFilter)
+	(DisableFrameFilter, SetFrameFilterPriority)
+	(ShowFrameFilterPriority, InfoFrameFilter): Reword help text.
+
+2018-10-06  Tom Tromey  <tom@tromey.com>
+
+	PR tui/28819:
+	* tui/tui-io.c (gdb_wgetch): New function.
+	(tui_mld_getc, tui_getc): Use it.
+
+2018-10-05  Tom Tromey  <tom@tromey.com>
+
+	* sol-thread.c (sol_thread_target::wait): Rename inner
+	"save_ptid".
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* configure: Rebuild.
+	* warning.m4 (AM_GDB_WARNINGS): Add -Wshadow=local.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* guile/scm-frame.c (gdbscm_frame_read_var): Remove inner
+	declaration of "block".
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* common/filestuff.c (fdwalk): Remove inner declaration of
+	"result".
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* msp430-tdep.c (msp430_push_dummy_call): Rename inner
+	"structs_addr" and hoist declaration.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* linux-tdep.c (linux_make_mappings_corefile_notes): Introduce new
+	variable "size".
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* mdebugread.c (parse_partial_symbols): Use std::string.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* ctf.c (SET_ARRAY_FIELD): Rename "u32".
+	* p-valprint.c (pascal_val_print): Split inner "i" variable.
+	* xtensa-tdep.c (xtensa_push_dummy_call): Declare "i" in loop
+	header.
+	* xstormy16-tdep.c (xstormy16_push_dummy_call): Declare "val" in
+	more inner scope.
+	* xcoffread.c (read_xcoff_symtab): Rename inner "symbol".
+	* varobj.c (varobj_update): Rename inner "newobj",
+	"type_changed".
+	* valprint.c (generic_emit_char): Rename inner "buf".
+	* valops.c (find_overload_match): Rename inner "temp".
+	(value_struct_elt_for_reference): Declare "v" in more inner
+	scope.
+	* v850-tdep.c (v850_push_dummy_call): Rename "len".
+	* unittests/array-view-selftests.c (run_tests): Rename inner
+	"vec".
+	* tui/tui-stack.c (tui_show_frame_info): Declare "i" in loop
+	header.
+	* tracepoint.c (merge_uploaded_trace_state_variables): Declare
+	"tsv" in more inner scope.
+	(print_one_static_tracepoint_marker): Rename inner
+	"tuple_emitter".
+	* tic6x-tdep.c (tic6x_analyze_prologue): Declare "inst" lower.
+	(tic6x_push_dummy_call): Don't redeclare "addr".
+	* target-float.c: Declare "dto" lower.
+	* symtab.c (lookup_local_symbol): Rename inner "sym".
+	(find_pc_sect_line): Rename inner "pc".
+	* stack.c (print_frame): Don't redeclare "gdbarch".
+	(return_command): Rename inner "gdbarch".
+	* s390-tdep.c (s390_prologue_frame_unwind_cache): Renam inner
+	"sp".
+	* rust-lang.c (rust_internal_print_type): Declare "i" in loop
+	header.
+	* rs6000-tdep.c (ppc_process_record): Rename inner "addr".
+	* riscv-tdep.c (riscv_push_dummy_call): Declare "info" in inner
+	scope.
+	* remote.c (remote_target::update_thread_list): Don't redeclare
+	"tp".
+	(remote_target::process_initial_stop_replies): Rename inner
+	"thread".
+	(remote_target::remote_parse_stop_reply): Don't redeclare "p".
+	(remote_target::wait_as): Don't redeclare "stop_reply".
+	(remote_target::get_thread_local_address): Rename inner
+	"result".
+	(remote_target::get_tib_address): Likewise.
+
+	* regcache.c (cooked_read_test): Rename "regnum".
+	* record-btrace.c (cmd_record_btrace_start): Rename inner
+	"exception".
+	* ppc-sysv-tdep.c (ppc64_sysv_abi_return_value): Declare "i" in
+	loop header.
+	* ppc-linux-tdep.c (ppc_linux_syscall_record): Declare "i" in loop
+	header.
+	(ppu2spu_sniffer): Rename inner "buf".
+	* parse.c (operator_check_standard): Rename inner "type",
+	"objfile".
+	* p-valprint.c (pascal_val_print): Introduce new scope for
+	"low_bound", "high_bound".
+	* p-exp.y (yylex): Declare "i" in loop header.
+	* objfiles.c (objfile_relocate1): Declare "i" in loop header.
+	Lower declaration of "s".
+	* nios2-tdep.c (nios2_analyze_prologue): Declare "i" in loop
+	header.
+	(nios2_push_dummy_call): Rename "len".
+	* nat/linux-osdata.c (linux_xfer_osdata_cpus): Rename static
+	"buf".
+	(linux_xfer_osdata_fds, linux_xfer_osdata_shm)
+	(linux_xfer_osdata_sem, linux_xfer_osdata_msg)
+	(linux_xfer_osdata_modules): Likewise.
+	* mips-tdep.c (mips_eabi_push_dummy_call): Rename outer "len".
+	(mips_n32n64_push_dummy_call, mips_o32_push_dummy_call)
+	(mips_o64_push_dummy_call): Likewise.
+	* microblaze-tdep.c (microblaze_analyze_prologue): Rename inner
+	"op".
+	* mi/mi-main.c (list_available_thread_groups): Rename inner
+	"tuple_emitter".
+	(mi_cmd_data_read_memory): Rename inner "opts".
+	* mi/mi-cmd-var.c (varobj_update_one): Rename inner
+	"tuple_emitter".
+	* mep-tdep.c (mep_analyze_prologue): Declare "rn" in loop header.
+	* mdebugread.c (parse_symbol): Rename inner "b".  Declare "f" in
+	more inner scope.
+	(parse_partial_symbols): Rename inner "pst", "p", "name"
+	* main.c (captured_main_1): Rename inner "i"s.
+	* machoread.c (macho_symfile_read_all_oso): Don't redeclare
+	"oso2".
+	* linux-tdep.c (linux_info_proc): Rename inner "filename".
+	* linespec.c (linespec_lexer_lex_string): Rename inner "p".
+	* infrun.c (handle_no_resumed): Don't redeclare "thread".
+	(handle_signal_stop): Rename inner "gdbarch".
+	(handle_command): Declare "signum" in loop header.
+	* ia64-tdep.c (ia64_pseudo_register_read): Don't redeclare
+	"status".
+	(examine_prologue): Rename inner "sol" and "sof".
+	(ia64_extract_return_value): Rename inner "val".  Declare another
+	"val" in a more inner scope.
+	* hppa-bsd-tdep.c (hppabsd_find_global_pointer): Declare "buf" in
+	inner scope.
+	* guile/scm-symbol.c (gdbscm_lookup_symbol): Rename inner
+	"except".
+	* findvar.c (default_read_var_value): Don't redeclare "addr".
+	* f-exp.y (yylex): Declare "i" in loop header.
+	* eval.c (evaluate_subexp_standard): Don't redeclare "type".
+	Rename inner "type", "expect_type".
+	(evaluate_subexp_for_sizeof): Rename inner "pc".
+	* elfread.c (elf_symfile_read): Rename inner "abfd".
+	* dwarf2read.c (read_debug_names_from_section): Don't redeclare
+	"bytes_read".
+	(process_psymtab_comp_unit_reader): Don't redeclare "gdbarch".
+	(add_partial_subprogram): Rename inner "lowpc" and "highpc".
+	(dwarf_decode_line_header): Rename inner "lh".
+	* dwarf2loc.c (dwarf2_compile_expr_to_ax): Don't redeclare
+	"offset".  Declare "i" in loop header.
+	(disassemble_dwarf_expression): Rename inner "addr_size".
+	* dwarf2expr.c (dwarf_expr_context::execute_stack_op): Rename
+	inner "result".
+	(dwarf_expr_context::execute_stack_op): Rename inner "offset".
+	* dwarf2-frame.c (decode_frame_entry_1): Rename inner "length"s.
+	* disasm.c (do_mixed_source_and_assembly_deprecated): Rename inner
+	"inner_list_emitter".
+	(do_mixed_source_and_assembly): Rename inner "tuple_emitter".
+	* disasm-selftests.c (print_one_insn_test): Wrap "bplen"
+	declaration in a block.
+	* csky-tdep.c (csky_analyze_prologue): Declare "offset" lower.
+	* cp-valprint.c (cp_print_value_fields): Don't redeclare
+	"obstack_final_size".
+	* cp-support.c (inspect_type): Declare "i" in loop header.
+	* compile/compile.c (compile_instance::insert_symbol_error):
+	Rename inner "e".
+	* common/agent.c (agent_run_command): Remove inner "ret"
+	declaration.
+	* coffread.c (coff_symfile_read): Rename inner "name".
+	(coff_symfile_read): Rename inner "abfd".
+	* cli/cli-utils.c (get_number_trailer): Rename inner "val".
+	* cli/cli-cmds.c (print_disassembly): Rename inner "low" and
+	"high".
+	* c-exp.y (lex_one_token): Move "len" declaration lower.
+	* breakpoint.c (create_longjmp_master_breakpoint): Don't redeclare
+	"gdbarch".
+	(create_exception_master_breakpoint): Likewise.  Don't redeclare
+	"b".
+	(watch_command_1): Declare "mark" later.
+	(clear_command): Don't shadow "a" or "b".
+	(delete_command): Rename inner "b".
+	(delete_trace_command): Likewise.
+	* arm-tdep.c (thumb_process_displaced_32bit_insn): Rename inner
+	"op".
+	(arm_gdbarch_init): Remove inner "e_flags".
+	* arch/arm-get-next-pcs.c (thumb_get_next_pcs_raw): Declare
+	"offset" in inner blocks.
+
+2018-10-04  Simon Marchi  <simon.marchi@ericsson.com>
+
+	* dwarf-index-write.c (file_write): Don't write if the vector is
+	empty.
+
+2018-10-05  Tom de Vries  <tdevries@suse.de>
+
+	* python/py-progspace.c (pspy_solib_name): Fix type mismatch in
+	PyArg_ParseTuple call.
+
+2018-10-05  Tom de Vries  <tdevries@suse.de>
+
+	* python/py-record-btrace.c (recpy_bt_goto): Fix type mismatch in
+	PyArg_ParseTuple call.
+
+2018-10-04  Joel Brobecker  <brobecker@adacore.com>
+
+	* psymtab.c (recursively_search_psymtabs): Reformat parameters
+	to avoid exceeding 80 characters per line limit.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* symfile.c (syms_from_objfile_1, finish_new_objfile)
+	(reread_symbols): Update.
+	* complaints.h (clear_complaints): Remove argument.
+	* complaints.c (enum complaint_series): Remove.
+	(series): Remove global.
+	(complaint_internal): Update.
+	(clear_complaints): Remove argument.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* symfile.c (symbol_file_add_with_addrs): Do not print "no
+	debugging symbols" message if there is a separate debug objfile.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	PR cli/19551:
+	* symfile.c (symbol_file_add_with_addrs): Update output.
+	* psymtab.c (require_partial_symbols): Update output.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	PR cli/22234:
+	* complaints.c: Emit \n.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* symfile.c (symbol_file_add_with_addrs, symbol_file_clear)
+	(separate_debug_file_exists, find_separate_debug_file)
+	(add_symbol_file_command, reread_symbols, allocate_symtab)
+	(allocate_compunit_symtab): Use filtered printing, not
+	unfiltered.
+	* psymtab.c (require_partial_symbols, dump_psymtab)
+	(allocate_psymtab): Use filtered printing, not unfiltered.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* complaints.c (complaint_internal): Correctly check complaint
+	count.
+
+2018-10-04  Tom Tromey  <tom@tromey.com>
+
+	* complaints.h (struct complaints): Remove declaration.
+	* complaints.c (clear_complaints): Remove an unused variable.
+
+2018-10-04  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	* MAINTAINERS (Write After Approval): Add self.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* guile/scm-value.c (gdbscm_value_to_string): Initialize
+	"buffer_contents".
+	* coffread.c (coff_symtab_read): Initialize "newobj".
+
+2018-10-03  Simon Marchi  <simon.marchi@polymtl.ca>
+
+	* dwarf2read.c (read_func_scope): Remove struct keyword in
+	range-based for.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* README: Mention --enable-ubsan.
+	* NEWS: Mention --enable-ubsan.
+	* acinclude.m4: Include sanitize.m4.
+	* configure: Rebuild.
+	* configure.ac: Call AM_GDB_UBSAN.
+	* sanitize.m4: New file.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* expression.h (enum exp_opcode): Use uint8_t as base type.
+	* expprint.c (op_name): Handle invalid opcodes.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* parse.c (prefixify_expression): Add assert.
+	(parse_exp_in_context_1): Throw exception if the expression is
+	empty.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* dwarf2read.c (read_signed_leb128): Work in ULONGEST.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* c-exp.y (parse_number): Work in unsigned.  Remove casts.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* dwarf2read.c (read_subrange_type): Make "negative_mask"
+	unsigned.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* findvar.c (extract_integer): Do work in an unsigned type.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* common/enum-flags.h (enum_flags::operator~): Add static assert.
+	* symfile-add-flags.h (enum symfile_add_flag): Use unsigned as
+	base type.
+	* objfile-flags.h (enum objfile_flag): Use unsigned as base type.
+	* gdbtypes.h (enum type_instance_flag_value): Use unsigned as base
+	type.
+	* c-lang.h (enum c_string_type_values): Use unsigned as base
+	type.
+	* btrace.h (enum btrace_thread_flag): Use unsigned as base type.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* dwarf2-frame.h (dwarf2_frame_state_reg_info)
+	<~dwarf2_frame_state_reg_info>: Update.
+	<dwarf2_frame_state_reg_info>: Update.
+	<alloc_regs>: Add assertion.  Update.
+	<reg>: Now a std::vector.
+	<num_regs>: Remove.
+	<swap>: Update.
+	* dwarf2-frame.c (dwarf2_restore_rule, execute_cfa_program)
+	(execute_cfa_program_test, dwarf2_frame_cache): Update.
+
+2018-10-03  Tom Tromey  <tom@tromey.com>
+
+	* namespace.c (add_using_directive): Don't pass NULL to memcpy.
+
+2018-10-03  Philippe Waroquiers  <philippe.waroquiers@skynet.be>
+
+	* tid-parse.c (tid_is_in_list): Fix wrong 'See' comment.
+
+2018-10-02  Tom Tromey  <tom@tromey.com>
+
+	* aarch64-linux-tdep.c (aarch64_linux_sigframe_init): Use pulongest.
+
+2018-10-02  John Darrington <john@darrington.wattle.id.au>
+
+	* NEWS: Mention changed commands.
+	* ser-uds.c: New file.
+	* configure.ac (SER_HARDWIRE): Add ser-uds.o.
+	* configure: Regenerate.
+	* Makefile.in: Add new file.
+	* serial.c (serial_open): Check if filename is a socket
+	  and lookup the appropriate interface accordingly.
+
+2018-10-01  Alan Hayward  <alan.hayward@arm.com>
+
+	* aarch64-linux-tdep.c (AARCH64_SIGCONTEXT_RESERVED_OFFSET): Add
+	define.
+	(AARCH64_EXTRA_MAGIC): Likewise.
+	(AARCH64_FPSIMD_MAGIC): Likewise.
+	(AARCH64_SVE_MAGIC): Likewise.
+	(AARCH64_EXTRA_DATAP_OFFSET): Likewise.
+	(AARCH64_FPSIMD_FPSR_OFFSET): Likewise.
+	(AARCH64_FPSIMD_FPCR_OFFSET): Likewise.
+	(AARCH64_FPSIMD_V0_OFFSET): Likewise.
+	(AARCH64_FPSIMD_VREG_SIZE): Likewise.
+	(AARCH64_SVE_CONTEXT_VL_OFFSET): Likewise.
+	(AARCH64_SVE_CONTEXT_REGS_OFFSET): Likewise.
+	(AARCH64_SVE_CONTEXT_P_REGS_OFFSET): Likewise.
+	(AARCH64_SVE_CONTEXT_FFR_OFFSET): Likewise.
+	(AARCH64_SVE_CONTEXT_SIZE): Likewise.
+	(read_aarch64_ctx): Add function.
+	(aarch64_linux_sigframe_init): Detect FP registers.
+
+2018-10-01  Alan Hayward  <alan.hayward@arm.com>
+
+	* aarch64-tdep.c (AARCH64_Q0_REGNUM): Move to here.
+	(AARCH64_D0_REGNUM): Likewise.
+	(AARCH64_S0_REGNUM): Likewise.
+	(AARCH64_H0_REGNUM): Likewise.
+	(AARCH64_B0_REGNUM): Likewise.
+	(AARCH64_SVE_V0_REGNUM): Likewise.
+	* arch/aarch64.h (AARCH64_Q0_REGNUM): Move from here.
+	(AARCH64_D0_REGNUM): Likewise.
+	(AARCH64_S0_REGNUM): Likewise.
+	(AARCH64_H0_REGNUM): Likewise.
+	(AARCH64_B0_REGNUM): Likewise.
+	(AARCH64_SVE_V0_REGNUM): Likewise.
+
+2018-10-01  Gary Benson <gbenson@redhat.com>
+
+	* gdb_proc_service.h (gdb_prfpregset_t): Remove typedef.
+	* proc-service.c (ps_lgetfpregs, ps_lsetfpregs): Use
+	prfpregset_t instead of gdb_prfpregset_t.
+	* configure.ac (PRFPREGSET_T_BROKEN): Remove check.
+	* configure, config.in: Rebuild.
+
+2018-10-01  Gary Benson <gbenson@redhat.com>
+
+	* common/gdb_proc_service.h: New file, factored out from...
+	* gdb_proc_service.h: Moved common code to the above file.
+	* Makefile.in (HFILES_NO_SRCDIR): Add the above new file.
+
+2018-10-01  Gary Benson <gbenson@redhat.com>
+
+	* gdb_proc_service.h: Use elf_gregset_t if prgregset_t is
+	undefined.  Use elf_fpregset_t if prfpregset_t is undefined.
+
+2018-10-01  Gary Benson <gbenson@redhat.com>
+
+	* configure.ac: Check if sys/procfs.h defines elf_fpregset_t.
+	(AC_CHECK_HEADERS): Check for linux/elf.h.
+	* configure, config.in: Rebuild.
+	* gdb_proc_service.h: Include linux/elf.h if sys/procfs.h
+	doesn't define elf_fpregset_t.
+
+2018-10-01  Gary Benson <gbenson@redhat.com>
+
+	* gdb_proc_service.h: Whitespace change.
+
+2018-10-01  Tom Tromey  <tom@tromey.com>
+
+	* unittests/scoped_mmap-selftests.c: Don't check HAVE_UNISTD_H.
+	* unittests/scoped_fd-selftests.c: Don't check HAVE_UNISTD_H.
+	* common/scoped_fd.h: Don't check HAVE_UNISTD_H.
+
+2018-10-01  Tom Tromey  <tom@tromey.com>
+
+	* README: Minor change.
+
+2018-09-30  Pedro Alves  <palves@redhat.com>
+
+	* darwin-nat-info.c (darwin_debug_regions_recurse)
+	(info_mach_exceptions_command): Remove unused local variables.
+	* darwin-nat.c (darwin_decode_notify_message)
+	(darwin_nat_target::resume, darwin_nat_target::mourn_inferior)
+	(darwin_stop_inferior, darwin_setup_exceptions)
+	(darwin_nat_target::kill, darwin_attach_pid, darwin_ptrace_him)
+	(darwin_nat_target::attach, darwin_nat_target::detach)
+	(darwin_read_write_inferior, darwin_read_dyld_info): Remove unused
+	local variables.
+	* i386-darwin-nat.c (i386_darwin_dr_set): Remove unused local
+	variables.
+
+2018-09-29  Tom Tromey  <tom@tromey.com>
+
+	* README: Remove some leftover text.
+
+2018-09-29  Tom Tromey  <tom@tromey.com>
+
+	* PROBLEMS: Rewrite.
+	* README: Update.
+
 2018-09-28  John Baldwin  <jhb@FreeBSD.org>
 
 	* disasm-selftests.c (print_one_insn_test): Add bfd_arch_riscv to
